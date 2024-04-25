@@ -25,7 +25,7 @@ const DashboardPage = async () => {
   return (
     <div>
       <AccountBanner />
-      <div className="mx-20">{renderDashboard()}</div>
+      <div className="mx-20 my-10">{renderDashboard()}</div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import type { IPopularDonationAmount } from "~/types/interfaces";
 import DonationTile from "./DonationTile";
 import { popularDonationAmounts } from "~/constants/popularDonationAmounts";
@@ -25,14 +26,19 @@ const UpdateBudget = async () => {
 
   return (
     <div className="container mx-auto">
-      <div className="lg:grid lg:grid-cols-3 lg:gap-4">
-        <div className="lg:col-span-2">
-          <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2">
-            {renderPopularDonationAmounts()}
+      <div className="my-12">
+        <h2 className="mb-8 text-center text-2xl text-grey-600 md:text-2xl">
+          Select a popular donation amount, or enter a custom one.
+        </h2>
+        <div className="lg:grid lg:grid-cols-3 lg:gap-4">
+          <div className="lg:col-span-2">
+            <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2">
+              {renderPopularDonationAmounts()}
+            </div>
           </div>
-        </div>
-        <div>
-          <CustomDonationAmount />
+          <div>
+            <CustomDonationAmount />
+          </div>
         </div>
       </div>
     </div>

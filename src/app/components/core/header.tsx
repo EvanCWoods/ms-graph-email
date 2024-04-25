@@ -39,7 +39,7 @@ const Header = () => {
       </div>
       <div className="flex gap-2">
         <SignedOut>
-          <Button text="Sign In" size="md" redirectUrl="/sign-in" />
+          <Button text="Sign In" size="md" redirectUrl="/login" />
           <Button
             text="Get Started"
             size="md"

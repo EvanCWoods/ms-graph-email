@@ -26,25 +26,27 @@ const Transactions = async () => {
           className="my-1 flex w-full justify-between px-5 py-3"
         >
           <div>
-            <p className="ml-1 max-w-[330px] overflow-hidden text-ellipsis whitespace-nowrap text-lg">
+            <p className="ml-1 max-w-[330px] overflow-hidden text-ellipsis whitespace-nowrap  text-sm">
               {transaction.charityName ?? "--"}
             </p>
             <div className="flex items-center">
-              <p className={`rounded-full px-3 py-2 text-white ${statusColor}`}>
+              <p
+                className={`rounded-full px-3 py-2 text-sm text-white ${statusColor}`}
+              >
                 {transaction.status}
               </p>
-              <p className="ml-5 text-lg">${transaction.amount / 100}</p>{" "}
-              <p className="ml-5 text-nowrap text-lg">
+              <p className="ml-5 text-sm">${transaction.amount / 100}</p>{" "}
+              <p className="ml-5 text-nowrap text-sm">
                 {transaction.subscriptionId ? "Subscription" : "One Off"}
               </p>
               {/* Added margin for spacing */}
-              <p className="ml-5">
+              <p className="ml-5 text-sm">
                 {new Date(transaction.createdAt).toLocaleDateString()}
               </p>
             </div>
           </div>
           <div className="flex items-end">
-            <button className="rounded-3xl border-2 px-5 py-2 text-brand-neutral">
+            <button className="rounded-3xl border-2 px-5 py-2 text-sm text-brand-neutral">
               Receipt
             </button>
           </div>
@@ -54,9 +56,12 @@ const Transactions = async () => {
   };
 
   return (
-    <div className="flex max-h-[300px] w-full flex-wrap justify-center overflow-y-scroll rounded-lg pb-5 pt-2 shadow-lg">
-      <h1 className="text-xl">Transactions</h1>
-      {renderTransactions()}
+    <div className="flex max-h-[300px] w-full flex-wrap justify-center rounded-lg border pb-5 pt-2 shadow-lg">
+      <h1 className="text-2xl text-gray-600">Transactions</h1>
+      <div className="my-2 w-full border-b"></div>
+      <div className="max-h-[220px] w-full overflow-y-scroll">
+        {renderTransactions()}
+      </div>
     </div>
   );
 };

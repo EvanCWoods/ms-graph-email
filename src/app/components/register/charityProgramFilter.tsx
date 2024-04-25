@@ -40,7 +40,7 @@ const CharityProgramFilter: React.FC<IProps> = async ({
       {isRegistering && (
         <div className="flex w-full justify-end px-6">
           <Link
-            className="rounded-md border border-brand-orange p-2 text-brand-orange"
+            className="rounded-md border border-brand-orange p-2 text-brand-orange hover:text-white hover:bg-brand-orange"
             href={"/dashboard"}
           >
             Skip for now

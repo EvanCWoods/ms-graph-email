@@ -38,10 +38,11 @@ const registrationPage: React.FC<IProps> = async ({ searchParams }) => {
   const { step, parent, id } = searchParams;
   //* Get the user's current registration step
   const signUpStep = await getSignupStep();
+  console.log(signUpStep)
   const userAccountType = (await getUserAccountType()) as AccountType;
 
   //* If the user's current registration step is not the same as the step in the URL, redirect them to the correct step
-  if (!step || !signUpStep) redirect("register?step=1");
+  if (!step) redirect("register?step=1");
   if (signUpStep && signUpStep !== parseInt(step.toString())) {
     redirect(`/register?step=${signUpStep}`);
   }

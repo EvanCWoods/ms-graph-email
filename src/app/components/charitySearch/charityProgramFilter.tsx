@@ -23,7 +23,7 @@ const SimpleCharityFilter: React.FC<IProps> = async ({ parentId }) => {
       <button key={program.classie_id} className="focus:outline-none">
         <Link
           href={`/charity-search/filter-search?parent=${program.classie_id}`}
-          className="m-2 flex size-[150px] transform items-center justify-center overflow-hidden rounded-lg bg-brand-lightOrange p-4 text-center transition duration-300 ease-in-out hover:scale-105 hover:shadow-lg md:size-[200px]"
+          className="bg-white text-center hover:text-brand-orange justify-center items-center flex w-[140px] h-[140px] md:h-[180px] md:w-[180px] overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg rounded-lg p-4 m-2 border hover:border-brand-orange"
         >
           {program.name}
         </Link>

@@ -15,7 +15,7 @@ const AccountTypeCard: React.FC = () => {
   const [accountType, setAccountType] = useState<string>("");
 
   const buttonStyles =
-    "shadow-md size-[150px] md:size-[200px] rounded-md text-brand-orange text-xl font-medium";
+    "shadow-md size-[150px] md:size-[200px] rounded-xl text-brand-orange border border-brand-orange hover:text-white hover:bg-brand-orange text-xl font-medium";
   return (
     <div className="w-full rounded-lg bg-white p-4">
       <h1 className="my-10 text-center text-2xl md:text-3xl">

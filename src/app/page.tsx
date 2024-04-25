@@ -28,8 +28,8 @@ export default async function HomePage() {
           height={1000}
         />
       </div>
-      <WhatWeDo />
       <FeaturedCharities featuredCharities={featuredCharities} />
+      <WhatWeDo />
     </main>
   );
 }

@@ -54,7 +54,7 @@ const OneTimeDonationButton: React.FC<IOneTimeDonationButtonProps> = ({
     <div>
       <button
         onClick={() => setOpenDonationModal(true)}
-        className="rounded-lg bg-brand-orange px-4 py-2 text-white"
+        className="rounded-lg border border-brand-orange text-brand-orange bg-white hover:text-white hover:bg-brand-orange hover:border-brand-orange px-4 py-2 "
       >
         Donate Now
       </button>

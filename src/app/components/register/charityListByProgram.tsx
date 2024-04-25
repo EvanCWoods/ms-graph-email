@@ -5,6 +5,7 @@ import React from "react";
 import { getCharitiesByCatagory } from "~/app/server-actions/charity/getCharitiesByCatagory";
 import Table from "../core/table/table";
 import { cn } from "~/utils/cn";
+import SelectCharityForDonation from "./selectCharityForDonation";
 
 interface IProps {
   parentId: string | undefined;
@@ -18,7 +19,7 @@ interface IProps {
  */
 const CharityListByProgram: React.FC<IProps> = async ({ parentId }) => {
   const charityList = await getCharitiesByCatagory(parentId);
-  const tableRowClasses = "border p-2 text-sm md:text-base";
+  const tableRowClasses = " border-b p-2 text-sm md:text-base";
   const renderCharityList = () => {
     if (!charityList) return null;
     return charityList.map((charity) => (
@@ -37,13 +38,21 @@ const CharityListByProgram: React.FC<IProps> = async ({ parentId }) => {
         <td className={cn(tableRowClasses, "text-xs md:text-sm")}>
           {charity.data.ProgramLocations[0].DisplayName}
         </td>
+        <td>
+          <SelectCharityForDonation
+            remainingBudget={10000}
+            charityId={charity.uuid}
+          />
+        </td>
       </tr>
     ));
   };
   return (
     <div>
       {/* Call the renderCharityPrograms function*/}
-      <Table columns={["Charity Name", "Project Name", "Project Location"]}>
+      <Table
+        columns={["Charity Name", "Project Name", "Project Location", "Select"]}
+      >
         <tbody>
           {renderCharityList()}
           {!charityList ||

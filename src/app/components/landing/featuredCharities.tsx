@@ -31,7 +31,13 @@ const FeaturedCharities = ({ featuredCharities }: IProps) => {
   };
 
   return (
-    <Carousel
+<div>
+  <div>
+  <h1 className="my-12 text-center text-4xl font-medium text-brand-orange xl:text-5xl">
+        Featured Charities
+      </h1>
+  </div>
+<Carousel
       className="mb-10 w-full"
       plugins={[
         AutoPlay({
@@ -42,6 +48,7 @@ const FeaturedCharities = ({ featuredCharities }: IProps) => {
     >
       <CarouselContent>{renderFeaturedCharities()}</CarouselContent>
     </Carousel>
+</div>
   );
 };
 

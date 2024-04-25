@@ -13,7 +13,7 @@ import ShieldIcon from "~/assets/icons/sheildIcon";
 const WhatWeDo = () => {
   return (
     <div>
-      <h1 className="mt-32 text-center text-4xl font-medium text-brand-orange xl:text-5xl">
+      <h1 className="mt-20 text-center text-4xl font-medium text-brand-orange xl:text-5xl">
         What We Do
       </h1>
       <p className="mt-4 text-center text-base xl:text-xl">

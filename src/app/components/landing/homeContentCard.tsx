@@ -27,7 +27,7 @@ const HomeContentCard: React.FC<IProps> = ({ title, text }) => {
       <div>
         <Button
           text="Get Started"
-          size="md"
+          size="lg"
           variant="secondary"
           redirectUrl="/register?step=1"
         />

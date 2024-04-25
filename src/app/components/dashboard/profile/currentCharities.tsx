@@ -27,12 +27,6 @@ const CurrentCharities = async () => {
             <span className="font-semibold">${charity.amount / 100}</span>
           </div>
           <div className="flex">
-            {/* <button className="rounded-lg bg-brand-lightOrange px-4 py-2 font-bold text-black">
-              Stop Donation
-            </button>
-            <button className="mx-3 rounded-lg bg-brand-lightOrange px-4 py-2 font-bold text-black">
-              Suspend Donation
-            </button> */}
             <OneTimeDonationButton
               charityId={charity.charityId}
               charityName={charity.charityName}
@@ -43,8 +37,9 @@ const CurrentCharities = async () => {
     });
   };
   return (
-    <div className="my-5 flex w-full flex-wrap justify-center rounded-lg pb-5 pt-2 shadow-lg">
-      <h1 className="text-xl">Current Charities</h1>
+    <div className=" flex w-full flex-wrap justify-center rounded-lg border pt-2 shadow-lg">
+      <h1 className="text-2xl text-gray-600">Current Charities</h1>
+      <div className="my-2 w-full border-b"></div>
       <div className="max-h-[250px] w-full overflow-y-scroll">
         {renderCharities()}
       </div>

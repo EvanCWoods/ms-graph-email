@@ -4,7 +4,7 @@ import { authMiddleware } from "@clerk/nextjs";
 export default authMiddleware({
   publicRoutes: [
     "/",
-    "/sign-in",
+    "/login",
     "/register",
     "/api/clerk",
     "/favicon.ico",
