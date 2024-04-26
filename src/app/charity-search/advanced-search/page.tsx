@@ -9,8 +9,11 @@ interface IProps {
   };
 }
 
+
 const searchPage: React.FC<IProps> = ({ searchParams }) => {
-  return <Table searchParams={searchParams} />;
+  return (
+      <Table searchParams={searchParams} />
+  );
 };
 
 export default searchPage;

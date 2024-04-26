@@ -4,6 +4,7 @@ import CharityDashboard from "~/app/components/dashboard/charity/charityDashboar
 import Profile from "~/app/components/dashboard/profile/profile";
 import getUserAccountType from "~/app/server-actions/user/getUserAccountType";
 
+
 /**
  * Renders the dashboard page based on the user's account type.
  *

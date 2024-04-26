@@ -1,9 +1,6 @@
 
-interface IProps {
-    hover: boolean;
-}
 
-const YourCharitiesIcon: React.FC<IProps> = ({ hover }) => {
+const YourCharitiesIcon: React.FC = () => {
     return (
       <svg
         width="30px"

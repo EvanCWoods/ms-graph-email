@@ -1,5 +1,5 @@
 import getAccountBudgetData from "~/app/server-actions/user/getAccountBudgetData";
-import updateUserBudget from "~/app/server-actions/user/updateUserBudget";
+// import updateUserBudget from "~/app/server-actions/user/updateUserBudget";
 
 /**
  * Renders the budget component.

@@ -5,6 +5,7 @@ import YourCharitiesIcon from "~/assets/yourCharitiesIcon";
 import CurrentCharities from "../components/dashboard/profile/currentCharities";
 import Link from "next/link";
 
+
 interface IProps {
   searchParams: {
     open?: boolean;
@@ -27,7 +28,7 @@ const SearchPage: React.FC<IProps> = ( { searchParams }) => {
       <div className="flex justify-between items-center mt-16 w-full px-10">
         <h1 className="text-center text-3xl flex-1">Find Charities</h1>
         <Link href="/charity-search?open=true" className="flex justify-center items-center w-12 h-12">
-          <YourCharitiesIcon hover={true} />
+          <YourCharitiesIcon />
         </Link>
       </div>
       <div className="width-full my-20 gap-5 flex flex-wrap justify-center">

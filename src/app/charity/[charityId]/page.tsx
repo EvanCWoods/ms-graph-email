@@ -14,6 +14,7 @@ interface IProps {
   };
 }
 
+
 /**
  * Renders the CharityPage component.
  *

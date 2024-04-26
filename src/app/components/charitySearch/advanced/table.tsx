@@ -24,7 +24,8 @@ const PageResults: React.FC<ITableProps> = async ({ searchParams }) => {
     );
 
     const renderCharities = () => {
-      return charities?.map((charity) => (
+      if(!charities) return null;
+      return charities.map((charity) => (
         <tr key={charity.id} className="border-b">
           <td className="p-2">
             <Link

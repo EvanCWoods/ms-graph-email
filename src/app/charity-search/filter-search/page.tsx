@@ -6,6 +6,7 @@ interface IProps {
   };
 }
 
+
 const searchPage: React.FC<IProps> = async ({ searchParams }) => {
   const { parent } = searchParams;
 
