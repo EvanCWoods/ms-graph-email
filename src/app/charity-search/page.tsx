@@ -42,7 +42,7 @@ const SearchPage: React.FC<IProps> = ( { searchParams }) => {
       </div>
       { searchParams.open && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-lg">
+          <div className="bg-white rounded-lg shadow-lg min-w-[300px]">
             <div className="flex justify-end">
             <Link href="/charity-search" className="mt-4  text-brand-orange px-4 py-2">
               Close

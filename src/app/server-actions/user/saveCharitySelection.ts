@@ -24,6 +24,8 @@ const saveCharitySelection = async (formData: FormData) => {
 
   const charityData: unknown = await getOneCharityById(charityId);
 
+  console.log(charityData)
+
   console.log({
     charityId,
     amount: parseFloat(donationAmount),

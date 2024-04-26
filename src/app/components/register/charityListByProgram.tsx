@@ -41,7 +41,7 @@ const CharityListByProgram: React.FC<IProps> = async ({ parentId }) => {
         <td>
           <SelectCharityForDonation
             remainingBudget={10000}
-            charityId={charity.uuid}
+            charityId={charity.data.CharityUuid}
           />
         </td>
       </tr>
