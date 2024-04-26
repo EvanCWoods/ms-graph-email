@@ -48,12 +48,16 @@ const companySchema = new mongoose.Schema({
   currentCharities: {
     type: [monthlyAllocation],
   },
+  donationSchedule: {
+    type: String,
+  }
 });
 
 export interface ICompany {
   userId: mongoose.Types.ObjectId;
   monthlyBudget: number;
   currentCharities: IMonthlyAllocation[];
+  donationSchedule: string;
 }
 
 export interface ICompanyDocument extends ICompany, mongoose.Document {}

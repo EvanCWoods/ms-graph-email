@@ -33,7 +33,7 @@ const FeaturedCharities = ({ featuredCharities }: IProps) => {
   return (
 <div>
   <div>
-  <h1 className="my-12 text-center text-4xl font-medium text-brand-orange xl:text-5xl">
+  <h1 className="my-12 text-center text-4xl font-medium text-black xl:text-5xl">
         Featured Charities
       </h1>
   </div>

@@ -1,8 +1,10 @@
-
 import type { IPopularDonationAmount } from "~/types/interfaces";
 import DonationTile from "./DonationTile";
 import { popularDonationAmounts } from "~/constants/popularDonationAmounts";
 import CustomDonationAmount from "./customDonationAmount";
+import checkDonationSchedule from "~/app/server-actions/user/checkDonationSchedule";
+import { redirect } from "next/navigation";
+
 
 /**
  * Renders the UpdateBudget component.
@@ -12,6 +14,12 @@ import CustomDonationAmount from "./customDonationAmount";
  * @returns {React.ReactNode} The rendered UpdateBudget component.
  */
 const UpdateBudget = async () => {
+
+    const donationSchedule = await checkDonationSchedule();
+
+    if (donationSchedule === "single") {
+      redirect(`/charity-search`);
+    }
   const renderPopularDonationAmounts = () => {
     return popularDonationAmounts.map((donation: IPopularDonationAmount) => {
       return (

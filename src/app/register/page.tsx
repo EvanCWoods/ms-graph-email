@@ -15,13 +15,15 @@ import AddCharityDetails from "~/app/components/register/addCharityDetails";
 import AddCharityBankData from "~/app/components/register/addCharityBankData";
 import SaveStripePaymentMethod from "~/app/components/register/saveStripePaymentMethod";
 import type { AccountType } from "~/types";
+import DonationTypeSelect from "../components/register/donationTypeSelect";
 
 interface IProps {
   searchParams: {
     step: number;
-    id: string;
+    id?: string;
     page?: number;
     parent?: string;
+    schedule?: string;
   };
 }
 
@@ -35,7 +37,7 @@ interface IProps {
  * @returns {JSX.Element} The rendered registration page.
  */
 const registrationPage: React.FC<IProps> = async ({ searchParams }) => {
-  const { step, parent, id } = searchParams;
+  const { step, parent, id, schedule } = searchParams;
   //* Get the user's current registration step
   const signUpStep = await getSignupStep();
   console.log(signUpStep)
@@ -52,6 +54,7 @@ const registrationPage: React.FC<IProps> = async ({ searchParams }) => {
     userAccountType === "individual" || userAccountType === "company";
   const showCharity = userAccountType === "charity";
 
+
   const getRegistrationSteps = () => {
     if (userAccountType === "charity") return CHARITY_REGISTRATION_STEPS;
     if (userAccountType === "company") return COMPANY_REGISTRATION_STEPS;
@@ -61,8 +64,9 @@ const registrationPage: React.FC<IProps> = async ({ searchParams }) => {
   return (
     <div>
       <Stepper steps={getRegistrationSteps()} currentStep={step} />
-      {step == 1 && <AccountTypeCard />}
-      {step == 2 && <SignUpPage id={id} />}
+      {step == 1 && !id && <AccountTypeCard />}
+      {step == 1 && id && <DonationTypeSelect id={id} />}
+      {step == 2 && id && <SignUpPage id={id} schedule={schedule ?? "single"} />}
       {showIndividualOrCompany && step == 3 && <UpdateBudget />}
       {showIndividualOrCompany && step == 4 && <SaveStripePaymentMethod />}
       {showIndividualOrCompany && step == 5 && (

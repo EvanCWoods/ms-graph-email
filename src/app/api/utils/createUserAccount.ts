@@ -4,6 +4,8 @@
 import User from "~/models/User";
 import createUserStripeAccount from "~/app/server-actions/stripe/createUserStripeAccount";
 import dbConnect from "~/utils/dbConnect";
+import Individual from "~/models/Individual";
+import Company from "~/models/Company";
 
 /**
  * Creates a user in the database and Stripe.
@@ -20,6 +22,7 @@ export const createUserInDb = async (
   lastName: string,
   email: string,
   userId: string,
+  schedule: string,
 ) => {
   //* Create the user in Stripe
   const stripeCustomerId: string = await createUserStripeAccount(
@@ -37,7 +40,22 @@ export const createUserInDb = async (
       stripeCustomerId: stripeCustomerId,
       name: `${firstName} ${lastName}`,
       email: email,
-    },
+    }, 
   );
+
+  switch (user?.accountType) {
+    case "individual":
+      await Individual.findOneAndUpdate(
+        {userId: userId},
+        {donationSchedule: schedule}
+      );
+      break;
+    case "company":
+      await Company.findOneAndUpdate(
+        {userId: userId},
+        {donationSchedule: schedule}
+      )
+
+  }
   console.log({ user });
 };

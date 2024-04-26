@@ -13,7 +13,7 @@ const saveStripePaymentMethod = async () => {
       <form action={setupUserStripe}>
         <button
           type="submit"
-          className="rounded-lg bg-brand-orange px-3 py-1 text-white"
+          className="rounded-lg hover:bg-brand-orange px-3 py-1 hover:text-white text-brand-orange bg-white border border-brand-orange"
         >
           Go To Stripe
         </button>

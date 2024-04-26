@@ -12,7 +12,8 @@ interface IProps {
   };
 }
 
-const SearchPage: React.FC<IProps> = ( { searchParams }) => {
+const SearchPage: React.FC<IProps> = async ( { searchParams }) => {
+
   // const [openModal, setOpenModal] = useState(false);
 
   // const handleOpenCharitiesModal = () => {
@@ -25,29 +26,32 @@ const SearchPage: React.FC<IProps> = ( { searchParams }) => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mt-16 w-full px-10">
-        <h1 className="text-center text-3xl flex-1">Find Charities</h1>
-        <Link href="/charity-search?open=true" className="flex justify-center items-center w-12 h-12">
+      <div className="mt-16 flex w-full items-center justify-between px-10">
+        <h1 className="flex-1 text-center text-3xl">Find Charities</h1>
+        <Link
+          href="/charity-search?open=true"
+          className="flex h-12 w-12 items-center justify-center"
+        >
           <YourCharitiesIcon />
         </Link>
       </div>
-      <div className="width-full my-20 gap-5 flex flex-wrap justify-center">
+      <div className="width-full my-20 flex flex-wrap justify-center gap-5">
         <SearchTile
           redirectUrl="charity-search/advanced-search"
-          text="Advanced Search"
+          text="Search"
         />
-        <SearchTile
-          redirectUrl="charity-search/filter-search"
-          text="Filter Search"
-        />
+        <SearchTile redirectUrl="charity-search/filter-search" text="Filter" />
       </div>
-      { searchParams.open && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex justify-center items-center">
-          <div className="bg-white rounded-lg shadow-lg min-w-[300px]">
+      {searchParams.open && (
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="min-w-[300px] rounded-lg bg-white shadow-lg">
             <div className="flex justify-end">
-            <Link href="/charity-search" className="mt-4  text-brand-orange px-4 py-2">
-              Close
-            </Link>
+              <Link
+                href="/charity-search"
+                className="mt-4  px-4 py-2 text-brand-orange"
+              >
+                Close
+              </Link>
             </div>
             <CurrentCharities />
           </div>

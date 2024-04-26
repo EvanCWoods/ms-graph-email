@@ -53,5 +53,5 @@ export const saveUserAccountType = async (formData: FormData) => {
       break;
   }
 
-  redirect(`/register?step=2&id=${user?._id as string}`);
+  redirect(`/register?step=1&id=${user?._id as string}`);
 };

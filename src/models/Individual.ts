@@ -41,12 +41,16 @@ const individualSchema = new mongoose.Schema({
   currentCharities: {
     type: [monthlyAllocation],
   },
+  donationSchedule: {
+    type: String,
+  }
 });
 
 export interface IIndividual {
   userId: mongoose.Types.ObjectId;
   monthlyBudget: number;
   currentCharities: IMonthlyAllocation[];
+  donationSchedule: string;
 }
 
 export interface IIndividualDocument extends IIndividual, mongoose.Document {}
