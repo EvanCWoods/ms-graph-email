@@ -29,6 +29,9 @@ export default function BurgerMenu() {
           <DropdownMenuItem>
             <Link href={"/dashboard"}>Dashboard</Link>
           </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href={"/about"}>About Us</Link>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

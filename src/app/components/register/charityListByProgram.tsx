@@ -5,7 +5,9 @@ import React from "react";
 import { getCharitiesByCatagory } from "~/app/server-actions/charity/getCharitiesByCatagory";
 import Table from "../core/table/table";
 import { cn } from "~/utils/cn";
-import SelectCharityForDonation from "./selectCharityForDonation";
+//import SelectCharityForDonation from "./selectCharityForDonation";
+import ButtonPair from "../core/table/donateButtons";
+import checkDonationSchedule from "~/app/server-actions/user/checkDonationSchedule";
 
 interface IProps {
   parentId: string | undefined;
@@ -20,6 +22,8 @@ interface IProps {
 const CharityListByProgram: React.FC<IProps> = async ({ parentId }) => {
   const charityList = await getCharitiesByCatagory(parentId);
   const tableRowClasses = " border-b p-2 text-sm md:text-base";
+ const donationSchedule = await checkDonationSchedule()
+ console.log(donationSchedule)
   const renderCharityList = () => {
     if (!charityList) return null;
     return charityList.map((charity) => (
@@ -39,7 +43,8 @@ const CharityListByProgram: React.FC<IProps> = async ({ parentId }) => {
           {charity.data.ProgramLocations[0].DisplayName}
         </td>
         <td>
-          <SelectCharityForDonation
+          <ButtonPair
+            params={donationSchedule!}
             remainingBudget={10000}
             charityId={charity.data.CharityUuid}
           />

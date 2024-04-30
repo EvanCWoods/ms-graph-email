@@ -44,8 +44,8 @@ const updateDonationAmount = async (formData: FormData) => {
   }
 
   const signUpStep = await updateSignupStep();
-
-  redirect(`/register?step=${signUpStep}`);
+  const url = `/register?step=${signUpStep}`;
+  redirect(url);
 };
 
 export default updateDonationAmount;

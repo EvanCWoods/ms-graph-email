@@ -11,7 +11,7 @@ import dbConnect from "~/utils/dbConnect";
 const getAllCharitiesFromDb = async () => {
   await dbConnect();
 
-  return await Charity.find({});
+  return await Charity.find({verified: true});
 };
 
 export default getAllCharitiesFromDb;

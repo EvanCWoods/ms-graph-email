@@ -25,8 +25,8 @@ const setAdminSearchUsersFilters = async (formData: FormData) => {
   // Redirect to the same page, but with the updated filters
   // Assuming the base URL is `/admin/users`, add `page=0` by default and other parameters as needed
   queryParams.append("page", "1");
-
-  redirect(`/admin/users?${queryParams.toString()}`);
+  const url = `/admin/users?${queryParams.toString()}`;
+  redirect(url);
 };
 
 export default setAdminSearchUsersFilters;

@@ -1,3 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.hover-border-effect {
+  position: relative;
+  overflow: hidden;
+}
+.hover-border-effect:before,
+.hover-border-effect:after,
+.hover-border-effect .left,
+.hover-border-effect .right {
+  content: "";
+  position: absolute;
+  background: var(
+    --brand-orange,
+    #f97316
+  ); /* Custom property for color fallback */
+  transition: all 0.4s ease;
+}
+.hover-border-effect:before,
+.hover-border-effect:after {
+  width: 0;
+  height: 2px;
+}
+.hover-border-effect .left,
+.hover-border-effect .right {
+  width: 2px;
+  height: 0;
+}
+.hover-border-effect:before {
+  top: 0;
+  left: 0;
+}
+.hover-border-effect:after {
+  bottom: 0;
+  right: 0;
+}
+.hover-border-effect .left {
+  top: 0;
+  left: 0;
+}
+.hover-border-effect .right {
+  bottom: 0;
+  right: 0;
+}
+.hover-border-effect:hover:before,
+.hover-border-effect:hover:after {
+  width: 100%;
+}
+.hover-border-effect:hover .left,
+.hover-border-effect:hover .right {
+  height: 100%;
+}
+
+
+.white-glassmorphism {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}

@@ -46,7 +46,8 @@ const registrationPage: React.FC<IProps> = async ({ searchParams }) => {
   //* If the user's current registration step is not the same as the step in the URL, redirect them to the correct step
   if (!step) redirect("register?step=1");
   if (signUpStep && signUpStep !== parseInt(step.toString())) {
-    redirect(`/register?step=${signUpStep}`);
+    const url = `/register?step=${signUpStep}`;
+    redirect(url);
   }
 
   // Check if the user account type is either "individual" or "company"

@@ -8,7 +8,8 @@ const saveDonationSchedule = async (formData: FormData) => {
     if (!id || !schedule) {
         return;
     }
-    redirect(`/register?step=2&id=${id}&schedule=${schedule}`)
+    const url = `/register?step=2&id=${id}&schedule=${schedule}`
+    redirect(url)
 }
 
 export default saveDonationSchedule;;

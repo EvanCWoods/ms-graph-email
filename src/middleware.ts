@@ -6,6 +6,7 @@ export default authMiddleware({
     "/",
     "/login",
     "/register",
+    "/about",
     "/api/clerk",
     "/favicon.ico",
     "/api/stripe",

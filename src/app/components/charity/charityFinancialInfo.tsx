@@ -35,12 +35,12 @@ const CharityFinancialInfo = ({
   const dateToReport = new Date(nextDateToReport);
   const formattedDateToReport = dateToReport.toLocaleDateString("en-GB");
   return (
-    <div className="p-3 shadow">
-      <h2 className="mb-2 text-xl font-medium">Financial Information</h2>
+    <div className="p-3 shadow text-center">
+      <h2 className="mb-2 text-xl font-medium text-brand-orange">Financial Information</h2>
       <h3 className="mb-2">Last Reported: {formattedDateReported}</h3>
       <h3 className="mb-2">Next Report Due: {formattedDateToReport}</h3>
-      <div className="mb-8 mt-4 grid columns-1 gap-4 md:columns-2">
-        <div className="w-full">
+      <div className="mb-8 mt-4 grid columns-1 gap-4 md:flex justify-center">
+        <div className="w-full md:w-[45%] shadow p-3">
           <p className="mb-2 text-lg font-medium">
             Income: $
             {(
@@ -59,7 +59,7 @@ const CharityFinancialInfo = ({
             <li>Investments - ${investments}</li>
           </ul>
         </div>
-        <div className="w-full">
+        <div className="w-full md:w-[45%] shadow p-3">
           <h2 className="mb-2 text-lg font-medium">
             Expenditure: $
             {(

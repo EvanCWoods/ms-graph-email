@@ -30,7 +30,7 @@ const SelectCharityForDonation: React.FC<ISelectCharityForDonationProps> = ({
 
   return (
     <div>
-      <button onClick={handleSelect}>Select</button>
+      <button className="bg-brand-orange text-[#fff] shadow-md hover:shadow-lg px-4 py-2 text-base rounded-md" onClick={handleSelect}>Select Charity</button>
 
       {openDonationModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

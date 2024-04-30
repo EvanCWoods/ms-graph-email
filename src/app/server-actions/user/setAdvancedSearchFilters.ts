@@ -20,8 +20,8 @@ const setAdvancedSearchFilters = async (formData: FormData) => {
   if (countries) queryParams.append("f[]", `countries:${countries}`);
   if (state) queryParams.append("f[]", `operating_state:${state}`);
   if (size) queryParams.append("f[]", `size:${size}`);
-
-  redirect(`/charity-search/advanced-search?${queryParams.toString()}`);
+  const url = `/charity-search/advanced-search?${queryParams.toString()}`;
+  redirect(url);
 };
 
 export default setAdvancedSearchFilters;

@@ -10,7 +10,8 @@ import { redirect } from "next/navigation";
  */
 const redirectForCharitySearch = async (formData: FormData) => {
   const searchInput = formData.get("search-input") as string;
-  redirect(`/admin/featured-charities?searchTerm=${searchInput}`);
+  const url = `/admin/featured-charities?searchTerm=${searchInput}`;
+  redirect(url);
 };
 
 export default redirectForCharitySearch;

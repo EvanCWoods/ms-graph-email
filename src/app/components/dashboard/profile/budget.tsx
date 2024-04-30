@@ -22,57 +22,79 @@ const Budget = async () => {
         : ((budget.allocatedBudget / budget.budget) * 100).toFixed(2); // Avoid division by zero and round to two decimals
 
     return (
-      <div className="w-full">
-        <div className="flex flex-col justify-between md:flex-row">
-          <div>
-            <p>Total Budget:</p>
-            <span className="absolute translate-x-1">$</span>
-            {/* <form action={updateUserBudget}> */}
-            <input
-              type="number"
-              name="budget"
-              id="budget"
-              defaultValue={budget.budget / 100}
-              step={0.5}
-              min={5}
-              className="px-4"
-            />
-            {/* <button type="submit">Save</button> */}
-            {/* </form> */}
+      <div className="w-full px-4">
+        <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
+          <div className="relative">
+            <label
+              htmlFor="budget"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Total Budget:
+            </label>
+            <div className="relative mt-1 rounded-md shadow-sm">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <span className="text-gray-500 sm:text-sm">$</span>
+              </div>
+              <input
+                type="number"
+                name="budget"
+                id="budget"
+                defaultValue={budget.budget / 100}
+                step={0.5}
+                min={5}
+                className="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm"
+              />
+            </div>
           </div>
-          <div>
-            <p>Used Budget:</p>
-            <span className="absolute translate-x-1">$</span>
-
-            <input
-              disabled
-              type="number"
-              name="usedBudget"
-              id="usedBudget"
-              className="px-4"
-              defaultValue={budget.allocatedBudget / 100}
-            />
+          <div className="relative">
+            <label
+              htmlFor="usedBudget"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Used Budget:
+            </label>
+            <div className="relative mt-1 rounded-md shadow-sm">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <span className="text-gray-500 sm:text-sm">$</span>
+              </div>
+              <input
+                disabled
+                type="number"
+                name="usedBudget"
+                id="usedBudget"
+                defaultValue={budget.allocatedBudget / 100}
+                className="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm"
+              />
+            </div>
           </div>
-          <div>
-            <p>Remaining Budget:</p>
-            <span className="absolute translate-x-1">$</span>
-
-            <input
-              disabled
-              type="text"
-              name="remainingBudget"
-              id="remainingBudget"
-              className="px-4"
-              defaultValue={budget.remainingBudget / 100}
-            />
+          <div className="relative">
+            <label
+              htmlFor="remainingBudget"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Remaining Budget:
+            </label>
+            <div className="relative mt-1 rounded-md shadow-sm">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <span className="text-gray-500 sm:text-sm">$</span>
+              </div>
+              <input
+                disabled
+                type="text"
+                name="remainingBudget"
+                id="remainingBudget"
+                defaultValue={budget.remainingBudget / 100}
+                className="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm"
+              />
+            </div>
           </div>
         </div>
-        <div className="mt-4 h-[15px] w-full rounded-lg bg-brand-lightOrange border">
+        <div className="mt-4 h-[15px] w-full rounded-lg border bg-brand-lightOrange">
           <div
             style={{ width: `${budgetUsage}%` }}
             className="h-[15px] rounded-lg bg-brand-orange"
           ></div>
-          <p>{budgetUsage}% of your budget Used</p>
+          <p className="mt-2 text-center">{budgetUsage}% of your budget Used</p>
         </div>
       </div>
     );
