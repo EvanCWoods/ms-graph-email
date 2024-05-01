@@ -3,15 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use server";
 
-interface ICharityProgram {
-  classie_id: string;
-  name: string;
-  description: string;
-  has_children: boolean;
-  parent_id: string | null;
-  parent_list: string[];
-}
-
 /**
  * Retrieves charity programs from the ACNC API.
  *
@@ -21,7 +12,7 @@ interface ICharityProgram {
  */
 export const getCharityPrograms = async (
   parentId?: string,
-): Promise<ICharityProgram[] | null> => {
+) => {
   try {
     let requestUrl;
     if (parentId) {
@@ -36,11 +27,9 @@ export const getCharityPrograms = async (
     }
 
     const data = await response.json();
-    console.log(data.results);
-    return data.results;
+    return data;
   } catch (error) {
     console.error("Error fetching charity programs:", error);
     return null;
-    throw error;
   }
 };

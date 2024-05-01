@@ -1,5 +1,4 @@
 import "server-only";
-
 import { auth } from "@clerk/nextjs";
 import User from "~/models/User";
 import dbConnect from "~/utils/dbConnect";
@@ -7,24 +6,32 @@ import dbConnect from "~/utils/dbConnect";
 /**
  * Retrieves the account type of the user.
  *
- * @returns {Promise<string|null>} The account type of the user, or null if the user is not authenticated or the account type is not found.
+ * @param {string | undefined} id - The id of the user to find, or null to use the authenticated user's ID.
+ * @returns {Promise<string | null>} The account type of the user, or null if the user is not found or the account type is not found.
  */
-const getUserAccountType = async () => {
-  const { userId } = auth();
+const getUserAccountType = async (id?: string | undefined) => {
+  await dbConnect();
+
+  if (id) {
+    const user = await User.findById(id).select("accountType");
+    if (!user) return;
+    return user.accountType;
+  }
+
+  // Use the provided ID or fall back to the authenticated user's ID
+  const {userId} = auth();
 
   if (!userId) return null;
 
-  await dbConnect();
-
-  const userAccountType = await User.findOne({ clerkUserId: userId }).select(
+  const user = await User.findOne({ clerkUserId: userId }).select(
     "accountType",
   );
 
-  if (!userAccountType) return null;
+  if (!user) return null;
 
-  console.log(userAccountType.accountType);
+  console.log(user.accountType);
 
-  return userAccountType.accountType;
+  return user.accountType;
 };
 
 export default getUserAccountType;

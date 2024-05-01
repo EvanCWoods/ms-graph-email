@@ -54,7 +54,7 @@ const OneTimeDonationButton: React.FC<IOneTimeDonationButtonProps> = ({
     <div>
       <button
         onClick={() => setOpenDonationModal(true)}
-        className="rounded-lg border border-brand-orange text-brand-orange bg-white hover:text-white hover:bg-brand-orange hover:border-brand-orange px-4 py-2 "
+        className="rounded-lg border border-brand-orange text-brand-orange bg-white hover:text-white hover:bg-brand-orange hover:border-brand-orange px-4 py-1 text-nowrap"
       >
         Donate Now
       </button>
@@ -75,12 +75,12 @@ const OneTimeDonationButton: React.FC<IOneTimeDonationButtonProps> = ({
             <div className="text-right">
               {/* Hidden form for creating the stripe checkout */}
               <form action={createStripeCheckout}>
-                <input type="hidden" name="charityId" value={charityId} />
                 <input
                   type="hidden"
                   name="amount"
                   value={selectedAmount ?? customAmount}
                 />
+                <input type="hidden" name="charityId" value={charityId} />
                 <input type="hidden" name="charityName" value={charityName} />
                 <button
                   className="mx-5"

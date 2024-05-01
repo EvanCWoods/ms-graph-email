@@ -3,8 +3,10 @@ import { auth } from "@clerk/nextjs";
 import Company from "~/models/Company";
 import Individual from "~/models/Individual";
 import User from "~/models/User";
+import dbConnect from "~/utils/dbConnect";
 
 const checkDonationSchedule = async () => {
+  await dbConnect();
   const { userId } = auth();
 
   if (!userId) return null;

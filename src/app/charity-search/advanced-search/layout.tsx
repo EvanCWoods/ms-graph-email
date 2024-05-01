@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 
 export const metadata = {
   title: "Advanced Search",
+  description: "Search for your favourite charities to support, from well known NFP's such as Australian Red Cross, to the charity that your neighbors runs from their spare room",
 };
 
 export default function AdvancedSearchLayout({
@@ -12,10 +13,10 @@ export default function AdvancedSearchLayout({
 }) {
   return (
     <div className="mt-4 flex flex-wrap">
-      <div className="mb-4 w-full min-w-[300px] md:w-[350px]">
+      <div className="mb-4 w-full min-w-[300px] flex-shrink-0 md:w-[30%]">
         <Filters />
       </div>
-      <div className="w-full md:w-[60%] lg:w-[65%]">{children}</div>
+      <div className="w-full flex-grow md:w-[70%]">{children}</div>
     </div>
   );
 }

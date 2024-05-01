@@ -16,6 +16,7 @@ import AddCharityBankData from "~/app/components/register/addCharityBankData";
 import SaveStripePaymentMethod from "~/app/components/register/saveStripePaymentMethod";
 import type { AccountType } from "~/types";
 import DonationTypeSelect from "../components/register/donationTypeSelect";
+import AddCompanyDetails from "../components/register/addCompanyDetails";
 
 interface IProps {
   searchParams: {
@@ -40,8 +41,8 @@ const registrationPage: React.FC<IProps> = async ({ searchParams }) => {
   const { step, parent, id, schedule } = searchParams;
   //* Get the user's current registration step
   const signUpStep = await getSignupStep();
-  console.log(signUpStep)
-  const userAccountType = (await getUserAccountType()) as AccountType;
+  console.log(signUpStep);
+  const userAccountType = (await getUserAccountType(id)) as AccountType;
 
   //* If the user's current registration step is not the same as the step in the URL, redirect them to the correct step
   if (!step) redirect("register?step=1");
@@ -51,10 +52,9 @@ const registrationPage: React.FC<IProps> = async ({ searchParams }) => {
   }
 
   // Check if the user account type is either "individual" or "company"
-  const showIndividualOrCompany =
-    userAccountType === "individual" || userAccountType === "company";
+  const showIndividual = userAccountType === "individual";
+  const showCompany = userAccountType === "company";
   const showCharity = userAccountType === "charity";
-
 
   const getRegistrationSteps = () => {
     if (userAccountType === "charity") return CHARITY_REGISTRATION_STEPS;
@@ -64,13 +64,20 @@ const registrationPage: React.FC<IProps> = async ({ searchParams }) => {
 
   return (
     <div>
-      <Stepper steps={getRegistrationSteps()} currentStep={step} />
+      {userAccountType && <Stepper steps={getRegistrationSteps()} currentStep={step} />}
       {step == 1 && !id && <AccountTypeCard />}
-      {step == 1 && id && <DonationTypeSelect id={id} />}
-      {step == 2 && id && <SignUpPage id={id} schedule={schedule ?? "single"} />}
-      {showIndividualOrCompany && step == 3 && <UpdateBudget />}
-      {showIndividualOrCompany && step == 4 && <SaveStripePaymentMethod />}
-      {showIndividualOrCompany && step == 5 && (
+      {step == 1 && id  && !showCharity && <DonationTypeSelect id={id} />}
+      {step == 2 && id && (
+        <SignUpPage id={id} schedule={schedule ?? "single"} />
+      )}
+      {showIndividual && step == 3 && <UpdateBudget />}
+      {showCompany && step == 3 && <AddCompanyDetails />}
+      {showCompany && step == 4 && <UpdateBudget />}
+      {showIndividual && step == 4 && <SaveStripePaymentMethod />}
+      {showCompany && step == 5 && (
+        <CharityProgramFilter parentId={parent} isRegistering />
+      )}
+      {showIndividual && step == 5 && (
         <CharityProgramFilter parentId={parent} isRegistering />
       )}
       {step == 3 && showCharity && <AddCharityDetails />}

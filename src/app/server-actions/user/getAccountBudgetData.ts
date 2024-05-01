@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@clerk/nextjs";
+import Company from "~/models/Company";
 import Individual from "~/models/Individual";
 import User from "~/models/User";
 import dbConnect from "~/utils/dbConnect";
@@ -33,14 +34,31 @@ const getAccountBudgetData = async () => {
         return;
       }
 
-      const allocatedBudget =
+      const userAllocatedBudget =
         individual.currentCharities.reduce((acc, item) => {
           return acc + item.amount;
         }, 0) ?? 0;
       return {
         budget: individual.monthlyBudget,
-        allocatedBudget: allocatedBudget,
-        remainingBudget: individual.monthlyBudget - allocatedBudget,
+        allocatedBudget: userAllocatedBudget,
+        remainingBudget: individual.monthlyBudget - userAllocatedBudget,
+      };
+    case "company":
+       const company = await Company.findOne({
+        userId: user._id as string,
+      });
+      if (!company) {
+        return;
+      }
+
+      const companyAllocatedBudget =
+        company.currentCharities.reduce((acc, item) => {
+          return acc + item.amount;
+        }, 0) ?? 0;
+      return {
+        budget: company.monthlyBudget,
+        allocatedBudget: companyAllocatedBudget,
+        remainingBudget: company.monthlyBudget - companyAllocatedBudget,
       };
   }
 };

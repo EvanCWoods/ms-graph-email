@@ -50,6 +50,12 @@ const companySchema = new mongoose.Schema({
   },
   donationSchedule: {
     type: String,
+  },
+  companyName: {
+    type: String,
+  },
+  companyAbn: {
+    type: String
   }
 });
 

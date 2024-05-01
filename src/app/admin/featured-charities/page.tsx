@@ -1,4 +1,5 @@
 import FeatureCharityButton from "~/app/components/admin/featuredCharities/featureCharityButton";
+import RemoveFeaturedButton from "~/app/components/admin/featuredCharities/removeFeaturedButton";
 import getAllCharitiesFromDb from "~/app/server-actions/charity/getAllCharitiesFromDb";
 
 export const metadata = {
@@ -25,7 +26,8 @@ const AdminFeaturedCharitiesPage = async () => {
               <td className=" px-4 py-2">{item.charityName}</td>
               <td className=" px-4 py-2">{item.abn}</td>
               <td className=" px-4 py-2">
-                <FeatureCharityButton id={item._id as string} />
+                {item.featured && <RemoveFeaturedButton id={item._id as string} />}
+                {!item.featured && <FeatureCharityButton id={item._id as string} charityName={item.charityName}/>}
               </td>
             </tr>
           ))}

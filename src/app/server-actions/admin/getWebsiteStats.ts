@@ -41,6 +41,16 @@ const getWebsiteStats = async () => {
       count: charityCount,
       redirectUrl: "/admin/users?page=1&accountType=charity",
     },
+    {
+      name: "Featured Charities",
+      count: "--",
+      redirectUrl: "/admin/featured-charities",
+    },
+    {
+      name: "Payouts",
+      count: "--",
+      redirectUrl: "/admin/charity-payout",
+    }
   ];
 };
 

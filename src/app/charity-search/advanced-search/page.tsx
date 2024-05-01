@@ -3,8 +3,9 @@ import Table from "~/app/components/charitySearch/advanced/table";
 interface IProps {
   searchParams: {
     search: string;
-    postcode: string;
+    location: string;
     beneficiaries: string;
+    state: string;
     countries: string;
   };
 }
@@ -12,7 +13,9 @@ interface IProps {
 
 const searchPage: React.FC<IProps> = ({ searchParams }) => {
   return (
+    <div className="w-full flex md:px-5">
       <Table searchParams={searchParams} />
+    </div>
   );
 };
 

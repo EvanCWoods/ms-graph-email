@@ -1,9 +1,10 @@
-import Logo from "~/assets/GoodChangeLogo.png";
+import Logo from "~/assets/logo-transparent.png";
 import Button from "./button";
 import Image from "next/image";
 import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import BurgerMenu from "./menu";
+import FeedbackButton from "./feedbackButton";
 
 const Header = () => {
   const renderSignedInNav = () => (
@@ -12,6 +13,7 @@ const Header = () => {
         <BurgerMenu />
       </div>
       <div className="hidden items-center gap-4 sm:flex">
+        <FeedbackButton/>
         <Link href="/about">About Us</Link>
         <Link href="/charity-search">Charity Search</Link>
         <Link href="/dashboard">Dashboard</Link>
@@ -26,6 +28,7 @@ const Header = () => {
         <BurgerMenu />
       </div>
       <div className="hidden items-center gap-3 sm:flex">
+        <FeedbackButton/>
         <Link href="/about">About Us</Link>
         <Button text="Sign In" size="md" redirectUrl="/login" />
         <Button

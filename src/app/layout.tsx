@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-script-component-in-head */
 import "~/styles/globals.css";
-
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import Footer from "~/app/components/core/footer";
 import Header from "~/app/components/core/header";
@@ -40,6 +41,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </body>
+        <GoogleAnalytics gaId="G-XBT55G960Q" />
       </html>
     </ClerkProvider>
   );

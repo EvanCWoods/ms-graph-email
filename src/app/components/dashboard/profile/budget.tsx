@@ -1,4 +1,6 @@
 import getAccountBudgetData from "~/app/server-actions/user/getAccountBudgetData";
+import getUserCharityBeneficiaries from "~/app/server-actions/user/getUserCharityBeneficiaries";
+import PieChart from "../../core/pieChart";
 // import updateUserBudget from "~/app/server-actions/user/updateUserBudget";
 
 /**
@@ -11,6 +13,7 @@ import getAccountBudgetData from "~/app/server-actions/user/getAccountBudgetData
  */
 const Budget = async () => {
   const budget = await getAccountBudgetData();
+  const changeAreas = await getUserCharityBeneficiaries();
 
   const renderBudget = () => {
     if (!budget) return null; // Return null to not render anything when budget is not yet loaded
@@ -110,7 +113,9 @@ const Budget = async () => {
       </div>
       {/* Areas of allocation */}
       <div className="flex w-1/5 flex-1 items-center justify-center">
-        <div className="h-[100px] w-[100px] rounded-full bg-brand-orange"></div>
+        <div className="h-[130px] w-full flex justify-center">
+          <PieChart labels={changeAreas?.labels ?? []} data={changeAreas?.data ?? []} showLegend={false} />
+        </div>
       </div>
     </div>
   );

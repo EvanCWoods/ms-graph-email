@@ -5,20 +5,21 @@ interface IColumnProps {
     params: string;
     charityId: string;
     remainingBudget: number; 
+    charityName: string;
   }
 
-const ButtonPair : React.FC<IColumnProps> = ({ params, charityId, remainingBudget }) => {
+const ButtonPair : React.FC<IColumnProps> = ({ params, charityId, remainingBudget, charityName }) => {
       if (params === "monthly") {
         return (
-            <div className="flex">
-              <OneTimeDonationButton charityName="test" charityId={charityId}/>
+            <div className="block">
+              <OneTimeDonationButton charityName={charityName} charityId={charityId}/>
               <SelectCharityForDonation charityId={charityId} remainingBudget={remainingBudget}/>
             </div>
           );
       }
       else {
         return (
-          <OneTimeDonationButton charityName="test" charityId="123"/>
+          <OneTimeDonationButton charityName={charityName} charityId={charityId} />
         );
       }
   };

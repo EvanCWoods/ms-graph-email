@@ -70,7 +70,6 @@ const saveCharitySelection = async (formData: FormData) => {
         userId: user._id as string,
       });
       if (!company) return;
-      company.currentCharities.push(newAllocation);
       // Create the subscription in stripe
       await createSubscriptionInStripe(
         user._id as ObjectId,
@@ -78,7 +77,6 @@ const saveCharitySelection = async (formData: FormData) => {
         newAllocation.charityName,
         parseFloat(donationAmount),
       );
-      await company.save();
   }
   // Update the currentCharities array
 };

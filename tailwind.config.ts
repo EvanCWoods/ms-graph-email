@@ -29,6 +29,7 @@ const config = {
           lightGrey: "#EFF1F6",
           utilityGreen: "#4BAF4F",
           neutral: "#ADB3CA",
+          contrast: "#FED6AA",
         },
       },
       keyframes: {

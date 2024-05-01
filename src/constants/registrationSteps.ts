@@ -1,23 +1,23 @@
 export const INDIVIDUAL_REGISTRATION_STEPS = [
   "Account Type",
-  "Personal Details",
-  "Budget",
-  "Payment Method",
-  "Charity Select",
+  "Sign Up",
+  "Update Budget",
+  "Save Payment Method",
+  "Select Charities to Support",
 ];
 
 export const CHARITY_REGISTRATION_STEPS = [
-  "Personal Details",
   "Account Type",
-  "Find Your Charity",
-  "Payment Method",
-  "Charity Select",
+  "Sign Up",
+  "Add Company Details",
+  "Update Budget",
+  "Charity Program",
 ];
 
 export const COMPANY_REGISTRATION_STEPS = [
   "Account Type",
-  "Personal Details",
-  "Find Your Charity",
-  "Payment Method",
-  "Charity Select",
+  "Company Contact Details",
+  "Add Company Details",
+  "Update Budget",
+  "Select Charities to Support",
 ];

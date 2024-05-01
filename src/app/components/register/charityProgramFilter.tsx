@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use server";
 import Link from "next/link";
 import React from "react";
@@ -23,7 +28,7 @@ const CharityProgramFilter: React.FC<IProps> = async ({
 
   const renderCharityPrograms = () => {
     if (!programs) return null;
-    return programs.map((program) => (
+    return programs.map((program: any) => (
       <button key={program.classie_id} className="focus:outline-none">
         <Link
           href={`/register?step=5&parent=${program.classie_id}`}

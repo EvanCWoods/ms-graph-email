@@ -19,15 +19,17 @@ type Charity = {
 
 const searchCharities = async (
   search: string,
-  postCode: string,
-  beneficiaries: string,
   location: string,
+  beneficiaries: string,
+  state:string,
+  countries: string,
 ): Promise<Charity[]> => {
   console.log({
     search,
-    postCode,
-    beneficiaries,
     location,
+    beneficiaries,
+    state,
+    countries,
   });
 
   // Create a new URL object and set the initial parameters
@@ -38,10 +40,19 @@ const searchCharities = async (
   if (search) {
     url.searchParams.set("search", search);
   }
-  if (postCode) {
-    url.searchParams.set("location", postCode);
+  if (location) {
+    url.searchParams.set("location", location);
   }
-
+  if (beneficiaries) {
+    url.searchParams.append("f[]", `beneficiaries:${beneficiaries}`);
+  }
+  if (state) {
+    url.searchParams.append("f[]", `operating_state:${state}`);
+  }
+  if (countries) {
+    url.searchParams.append("f[]", `countries:${countries}`);
+  }
+  console.log(url);
   const response = await fetch(url);
 
   const data = await response.json();

@@ -1,8 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use server";
 import Link from "next/link";
 import React from "react";
 import { getCharityPrograms } from "~/app/server-actions/charity/getCharityPrograms";
 import CharityListByProgram from "~/app/components/register/charityListByProgram";
+import BreadCrumbs from "./breadcrumbs";
 
 interface IProps {
   parentId: string | undefined;
@@ -18,8 +24,8 @@ const SimpleCharityFilter: React.FC<IProps> = async ({ parentId }) => {
   const programs = await getCharityPrograms(parentId);
 
   const renderCharityPrograms = () => {
-    if (!programs) return null;
-    return programs.map((program) => (
+    if (!programs.results) return null;
+    return programs.results.map((program: any) => (
       <button key={program.classie_id} className="focus:outline-none">
         <Link
           href={`/charity-search/filter-search?parent=${program.classie_id}`}
@@ -33,11 +39,14 @@ const SimpleCharityFilter: React.FC<IProps> = async ({ parentId }) => {
 
   return (
     <div>
-      <h1 className="text-3xl w-full text-center mt-16 mb-10">Choose a Program</h1>
+      <h1 className="mb-10 mt-16 w-full text-center text-3xl">
+        Choose a Program
+      </h1>
+       <BreadCrumbs programs={programs} />
       <div className="flex flex-wrap items-center justify-center gap-5 px-32">
         {renderCharityPrograms()}
       </div>
-      {parentId && programs?.length === 0 && (
+      {parentId && programs.results?.length === 0 && (
         <CharityListByProgram parentId={parentId} />
       )}
     </div>

@@ -1,6 +1,7 @@
 "use server";
 
 import { auth } from "@clerk/nextjs";
+import Company from "~/models/Company";
 import Individual from "~/models/Individual";
 import User from "~/models/User";
 import dbConnect from "~/utils/dbConnect";
@@ -32,6 +33,14 @@ const getUserCurrentCharities = async () => {
       if (!individual) return;
 
       return individual.currentCharities;
+    case "company":
+      const company = await Company.findOne({
+        userId: user._id as string,
+      });
+
+      if (!company) return;
+
+      return company.currentCharities;
   }
 };
 

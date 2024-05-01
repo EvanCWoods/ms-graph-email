@@ -19,7 +19,7 @@ const WebsiteStatCard: React.FC<IProps> = ({ name, count, redirectUrl }) => {
     <button
       onClick={() => window.location.replace(redirectUrl)}
       key={name + count}
-      className="m-3 flex h-[160px] w-[160px] cursor-pointer flex-wrap justify-center rounded-lg p-5 shadow-lg"
+      className="flex h-[160px] w-[160px] cursor-pointer flex-wrap justify-center rounded-lg p-5 shadow-lg"
     >
       <h1 className="w-full">{name}</h1>
       <p className="text-2xl">{count}</p>

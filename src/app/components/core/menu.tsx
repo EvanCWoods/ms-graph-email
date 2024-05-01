@@ -9,6 +9,7 @@ import {
 } from "../../components/ui/dropdown-menu";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
+import FeedbackButton from "./feedbackButton";
 
 export default function BurgerMenu() {
   return (
@@ -31,6 +32,9 @@ export default function BurgerMenu() {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href={"/about"}>About Us</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <FeedbackButton />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

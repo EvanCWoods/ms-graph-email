@@ -24,7 +24,7 @@ const WebsiteStats = async () => {
   };
 
   return (
-    <div className="flex items-center justify-evenly text-center">
+    <div className="flex items-center justify-evenly text-center flex-wrap">
       {renderData()}
     </div>
   );

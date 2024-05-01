@@ -15,13 +15,17 @@ interface IProps {
  */
 const FeaturedCharityCard: React.FC<IProps> = ({ name, description }) => {
   return (
-    <div className="mx-2 flex flex-col items-center justify-center rounded-lg shadow md:w-[80%] border">
-      <div className="flex flex-col w-full items-center justify-between p-5 md:flex-row md:w-[90%] xl:w-[85%]">
+    <div className="mx-2 flex flex-col items-center justify-center rounded-lg border bg-white shadow md:w-[80%]">
+      <div className="flex w-full flex-col items-center justify-between p-5 md:w-[90%] md:flex-row xl:w-[85%]">
         <div className="text-center md:text-left">
-          <h3 className="text-xl xl:text-4xl mb-3">{name}</h3>
-          <p className="text-base xl:text-lg">{description}</p>
+          <h3 className="mb-3 text-xl xl:text-4xl">{name}</h3>
+          <p className="whitespace-normal text-wrap text-base xl:text-lg">
+            {description}
+          </p>
         </div>
-        <OneTimeDonationButton charityId={""} charityName={""} />
+        <div className="ml-5">
+          <OneTimeDonationButton charityId={""} charityName={""} />
+        </div>
       </div>
     </div>
   );

@@ -53,5 +53,6 @@ export const saveUserAccountType = async (formData: FormData) => {
       break;
   }
   const url = `/register?step=1&id=${user?._id as string}`;
-  redirect(url);
+  const charityUrl = `/register?step=2&id=${user?._id as string}`;
+  accountType === "charity" ? redirect(charityUrl) : redirect(url);
 };
