@@ -12,11 +12,11 @@ import getSignupStep from "~/app/server-actions/user/getSignupStep";
 import { redirect } from "next/navigation";
 import getUserAccountType from "~/app/server-actions/user/getUserAccountType";
 import AddCharityDetails from "~/app/components/register/addCharityDetails";
-import AddCharityBankData from "~/app/components/register/addCharityBankData";
 import SaveStripePaymentMethod from "~/app/components/register/saveStripePaymentMethod";
 import type { AccountType } from "~/types";
 import DonationTypeSelect from "../components/register/donationTypeSelect";
 import AddCompanyDetails from "../components/register/addCompanyDetails";
+import BecomePayee from "../components/register/becomePayee";
 
 interface IProps {
   searchParams: {
@@ -64,24 +64,32 @@ const registrationPage: React.FC<IProps> = async ({ searchParams }) => {
 
   return (
     <div>
-      {userAccountType && <Stepper steps={getRegistrationSteps()} currentStep={step} />}
+      {userAccountType && (
+        <Stepper steps={getRegistrationSteps()} currentStep={step} />
+      )}
+      {/* Individual */}
       {step == 1 && !id && <AccountTypeCard />}
-      {step == 1 && id  && !showCharity && <DonationTypeSelect id={id} />}
-      {step == 2 && id && (
-        <SignUpPage id={id} schedule={schedule ?? "single"} />
+      {step == 1 && id && !showCharity && <DonationTypeSelect id={id} />}
+      {step == 2 && id && showIndividual && (
+        <SignUpPage id={id} schedule={schedule ?? "single"} step={3}/>
       )}
       {showIndividual && step == 3 && <UpdateBudget />}
-      {showCompany && step == 3 && <AddCompanyDetails />}
-      {showCompany && step == 4 && <UpdateBudget />}
       {showIndividual && step == 4 && <SaveStripePaymentMethod />}
-      {showCompany && step == 5 && (
-        <CharityProgramFilter parentId={parent} isRegistering />
-      )}
       {showIndividual && step == 5 && (
         <CharityProgramFilter parentId={parent} isRegistering />
       )}
-      {step == 3 && showCharity && <AddCharityDetails />}
-      {step == 4 && showCharity && <AddCharityBankData />}
+      {/* Company */}
+      {showCompany && step == 2 && id && schedule && <AddCompanyDetails id={id} schedule={schedule}/>}
+      {showCompany && step == 3 && id && <SignUpPage id={id} schedule={schedule ?? "single"} step={4} />}
+      {showCompany && step == 4 && <SaveStripePaymentMethod />}
+      {showCompany && step == 5 && <UpdateBudget />}
+      {showCompany && step == 6 && (
+        <CharityProgramFilter parentId={parent} isRegistering />
+      )}
+      {/* Charity */}
+      {step == 2 && showCharity && id && <AddCharityDetails id={id} />}
+      {step == 3 && showCharity && id && <SignUpPage id={id} schedule={schedule ?? "single"} step={4} />}
+      {step == 4 && showCharity && <BecomePayee />}
     </div>
   );
 };

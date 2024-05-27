@@ -1,5 +1,6 @@
-import OneTimeDonationButton from "~/app/components/core/oneTimeDonationButton";
+// import OneTimeDonationButton from "~/app/components/core/oneTimeDonationButton";
 import getUserCurrentCharities from "~/app/server-actions/user/getUserCurrentCharities";
+import CurrentCharityActions from "./currentCharityActions";
 
 /**
  * Renders the current charities component.
@@ -27,10 +28,7 @@ const CurrentCharities = async () => {
             <span className="font-semibold">${charity.amount / 100}</span>
           </div>
           <div className="flex">
-            <OneTimeDonationButton
-              charityId={charity.charityId}
-              charityName={charity.charityName}
-            />
+            <CurrentCharityActions charityId={charity.charityId} charityName={charity.charityName} subscriptionId={charity.subscriptionId} paused={charity.paused} />
           </div>
         </div>
       );
@@ -38,7 +36,7 @@ const CurrentCharities = async () => {
   };
   return (
     <div className=" flex w-full flex-wrap justify-center rounded-lg border pt-2 shadow-lg">
-      <h1 className="text-2xl text-gray-600">Current Charities</h1>
+      <h1 className="text-2xl text-gray-600">My Charities</h1>
       <div className="my-2 w-full border-b"></div>
       <div className="max-h-[250px] w-full overflow-y-scroll">
         {renderCharities()}

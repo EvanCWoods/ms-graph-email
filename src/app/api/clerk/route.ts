@@ -62,6 +62,7 @@ export async function POST(request: Request) {
       email,
       unsafe_metadata.userId as string,
       unsafe_metadata.schedule as string,
+      unsafe_metadata.step as number,
     );
   }
   if (type === "user.deleted" && id) {

@@ -5,6 +5,7 @@ import createStripeCheckout from "~/app/server-actions/stripe/createStripeChecko
 interface IOneTimeDonationButtonProps {
   charityId: string;
   charityName: string;
+  charityAbn: string;
 }
 
 const popularDonationAmounts = [
@@ -17,6 +18,7 @@ const popularDonationAmounts = [
 const OneTimeDonationButton: React.FC<IOneTimeDonationButtonProps> = ({
   charityId,
   charityName,
+  charityAbn,
 }) => {
   const [openDonationModal, setOpenDonationModal] = useState<boolean>(false);
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
@@ -54,17 +56,19 @@ const OneTimeDonationButton: React.FC<IOneTimeDonationButtonProps> = ({
     <div>
       <button
         onClick={() => setOpenDonationModal(true)}
-        className="rounded-lg border border-brand-orange text-brand-orange bg-white hover:text-white hover:bg-brand-orange hover:border-brand-orange px-4 py-1 text-nowrap"
+        className="w-full text-nowrap rounded-lg border border-brand-orange bg-white py-1 text-brand-orange hover:border-brand-orange hover:bg-brand-orange hover:text-white"
       >
         Donate Now
       </button>
       {openDonationModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="rounded-lg bg-white p-4 shadow-lg">
+          {/* This div centers content and takes up the entire viewport */}
+          <div className="m-auto max-w-md rounded-lg bg-white p-4 shadow-lg">
             <p>Donate To {charityName}</p>
             <div className="my-5 flex justify-evenly">
               {renderPopularDonationAmounts()}
             </div>
+
             <input
               className="mb-5 w-full rounded-lg border border-gray-300 p-2"
               type="number"
@@ -73,7 +77,6 @@ const OneTimeDonationButton: React.FC<IOneTimeDonationButtonProps> = ({
               onChange={handleCustomAmountChange}
             />
             <div className="text-right">
-              {/* Hidden form for creating the stripe checkout */}
               <form action={createStripeCheckout}>
                 <input
                   type="hidden"
@@ -82,6 +85,7 @@ const OneTimeDonationButton: React.FC<IOneTimeDonationButtonProps> = ({
                 />
                 <input type="hidden" name="charityId" value={charityId} />
                 <input type="hidden" name="charityName" value={charityName} />
+                <input type="hidden" name="charityAbn" value={charityAbn} />
                 <button
                   className="mx-5"
                   onClick={() => setOpenDonationModal(false)}

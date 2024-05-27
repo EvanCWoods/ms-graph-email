@@ -22,12 +22,23 @@ const monthlyAllocation = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  subscriptionId: {
+    type: String,
+    required: false,
+  },
+  paused: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 export interface IMonthlyAllocation {
   charityId: string;
   charityName: string;
   amount: number;
+  subscriptionId: string;
+  paused: boolean;
 }
 
 /**
@@ -55,8 +66,8 @@ const companySchema = new mongoose.Schema({
     type: String,
   },
   companyAbn: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 export interface ICompany {

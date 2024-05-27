@@ -60,6 +60,13 @@ const charitySchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  stripeAccountId: {
+    type: String,
+    required: false,
+  },
+  dgrRegistered: {
+    type: Boolean,
+  },
 });
 
 export interface ICharity {
@@ -73,6 +80,8 @@ export interface ICharity {
   charityId: string;
   featured: boolean;
   featureDescription: string;
+  stripeAccountId: string;
+  dgrRegistered: boolean;
 }
 
 export interface ICharityDocument extends ICharity, mongoose.Document {}

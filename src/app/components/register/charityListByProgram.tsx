@@ -6,8 +6,9 @@ import { getCharitiesByCatagory } from "~/app/server-actions/charity/getCharitie
 import Table from "../core/table/table";
 import { cn } from "~/utils/cn";
 //import SelectCharityForDonation from "./selectCharityForDonation";
-import ButtonPair from "../core/table/donateButtons";
 import checkDonationSchedule from "~/app/server-actions/user/checkDonationSchedule";
+import CharityActions from "../charitySearch/charityActions";
+import getAccountBudgetData from "~/app/server-actions/user/getAccountBudgetData";
 
 interface IProps {
   parentId: string | undefined;
@@ -21,13 +22,15 @@ interface IProps {
  */
 const CharityListByProgram: React.FC<IProps> = async ({ parentId }) => {
   const charityList = await getCharitiesByCatagory(parentId);
+      const budget = await getAccountBudgetData();
+      const donationSchedule = await checkDonationSchedule()
+
   const tableRowClasses = " border-b p-2 text-sm md:text-base";
- const donationSchedule = await checkDonationSchedule()
  console.log(donationSchedule)
   const renderCharityList = () => {
     if (!charityList) return null;
     return charityList.map((charity) => (
-      <tr key={charity.uuid}>
+      <tr key={charity.uuid} className="border-b">
         <td className={tableRowClasses}>
           <Link
             className="hover:text-brand-orange hover:underline"
@@ -43,18 +46,18 @@ const CharityListByProgram: React.FC<IProps> = async ({ parentId }) => {
           {charity.data.ProgramLocations[0].DisplayName}
         </td>
         <td>
-          <ButtonPair
-            params={donationSchedule!}
-            remainingBudget={10000}
-            charityId={charity.data.CharityUuid}
-            charityName={charity.data.CharityName}
+          <CharityActions
+            donationSchedule={donationSchedule!}
+            remainingBudget={budget ? budget.remainingBudget / 100 : 0}
+            charityId={charity.uuid}
+            charityName={charity.data.Name}
           />
         </td>
       </tr>
     ));
   };
   return (
-    <div>
+    <div className="px-10">
       {/* Call the renderCharityPrograms function*/}
       <Table
         columns={["Charity Name", "Project Name", "Project Location", "Select"]}

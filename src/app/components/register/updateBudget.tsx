@@ -4,6 +4,7 @@ import { popularDonationAmounts } from "~/constants/popularDonationAmounts";
 import CustomDonationAmount from "./customDonationAmount";
 import checkDonationSchedule from "~/app/server-actions/user/checkDonationSchedule";
 import { redirect } from "next/navigation";
+import getUserAccountType from "~/app/server-actions/user/getUserAccountType";
 
 
 /**
@@ -16,12 +17,14 @@ import { redirect } from "next/navigation";
 const UpdateBudget = async () => {
 
     const donationSchedule = await checkDonationSchedule();
+    const accountType = await getUserAccountType();
 
     if (donationSchedule === "single") {
       redirect(`/charity-search`);
     }
   const renderPopularDonationAmounts = () => {
-    return popularDonationAmounts.map((donation: IPopularDonationAmount) => {
+    if (accountType === "individual"){
+    return popularDonationAmounts.individual.map((donation: IPopularDonationAmount) => {
       return (
         <DonationTile
           key={donation.amount}
@@ -30,6 +33,17 @@ const UpdateBudget = async () => {
         />
       );
     });
+    } else {
+       return popularDonationAmounts.company.map((donation: IPopularDonationAmount) => {
+         return (
+           <DonationTile
+             key={donation.amount}
+             label={donation.label}
+             amount={donation.amount}
+           />
+         );
+       });
+    }
   };
 
   return (

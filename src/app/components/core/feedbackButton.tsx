@@ -1,13 +1,21 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useState } from "react";
+import React, { useState } from 'react';
 import saveFeedback from "~/app/server-actions/saveFeedback";
 import FeedbackIcon from "~/assets/icons/feedbackIcon";
+import FrownOrange from "~/assets/icons/frownOrange";
+import FrownWhite from "~/assets/icons/frownWhite";
+import NeutralOrange from "~/assets/icons/neutralOrange";
+import NeutralWhite from "~/assets/icons/neutralWhite";
+import SmileOrange from "~/assets/icons/smileOrange";
+import SmileWhite from "~/assets/icons/smileWhite";
 
-const labelsClass =
-  "px-4 py-2 border rounded border-brand-orange w-1/3 text-center bg-white text-brand-orange cursor-pointer transition-colors duration-200 ease-in-out hover:bg-brand-orange hover:text-white peer-checked:bg-brand-orange peer-checked:text-white";
 
+const labelClass = "w-[40px] h-[40px] block cursor-pointer hover:border-brand-orange hover:border-4 rounded-full"
 const FeedbackButton = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleClickAdd = () => {
     setIsOpen(true);
@@ -15,6 +23,11 @@ const FeedbackButton = () => {
 
   const handleClose = () => {
     setIsOpen(false);
+    handleOptionChange("");
+  };
+
+  const handleOptionChange = (option:any) => {
+    setSelectedOption(option);
   };
 
   return (
@@ -38,43 +51,47 @@ const FeedbackButton = () => {
                   How satisfied are you with Good Change?
                 </h3>
                 <div className="flex justify-between">
-                  <div>
                     <input
                       type="radio"
                       id="unsatisfied"
                       name="satisfaction"
                       value="unsatisfied"
-                      className="peer hidden"
+                      className="hidden"
+                      checked={selectedOption === 'unsatisfied'}
+                      onChange={() => handleOptionChange('unsatisfied')}
+                      required
                     />
-                    <label htmlFor="unsatisfied" className={labelsClass}>
-                      Unsatisfied
+                    <label htmlFor="unsatisfied" className={`${labelClass} ml-10`}>
+                      {selectedOption === 'unsatisfied' ? <FrownWhite /> : <FrownOrange />}
                     </label>
-                  </div>
-                  <div>
                     <input
                       type="radio"
                       id="indifferent"
                       name="satisfaction"
                       value="indifferent"
-                      className="peer hidden"
+                      className="hidden"
+                      checked={selectedOption === 'indifferent'}
+                      onChange={() => handleOptionChange('indifferent')}
+                      required
                     />
-                    <label htmlFor="indifferent" className={labelsClass}>
-                      Indifferent
+                    <label htmlFor="indifferent" className={`${labelClass}`}>
+                      {selectedOption === 'indifferent' ? <NeutralWhite /> : <NeutralOrange />}
                     </label>
-                  </div>
-                  <div>
                     <input
                       type="radio"
                       id="satisfied"
                       name="satisfaction"
                       value="satisfied"
-                      className="peer hidden"
+                      className="hidden"
+                      checked={selectedOption === 'satisfied'}
+                      onChange={() => handleOptionChange('satisfied')}
+                      required
                     />
-                    <label htmlFor="satisfied" className={labelsClass}>
-                      Satisfied
+                    <label htmlFor="satisfied" className={`${labelClass} mr-10`}>
+                      {selectedOption === 'satisfied' ? <SmileWhite /> : <SmileOrange />}
                     </label>
-                  </div>
                 </div>
+                
                 <h3 className="mt-3 text-lg text-black">
                   Do you wish to elaborate?
                 </h3>

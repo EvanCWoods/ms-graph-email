@@ -38,7 +38,7 @@ const updateDonationAmount = async (formData: FormData) => {
         {
           userId: user._id as Types.ObjectId,
         },
-        { monthlyBudget: donationAmount },
+        { monthlyBudget: parseFloat(donationAmount) * 100 },
       );
       break;
   }

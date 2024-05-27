@@ -3,7 +3,8 @@ import Link from "next/link";
 import Table from "../../core/table/table";
 //import ButtonPair from "../../core/table/donateButtons";
 import checkDonationSchedule from "~/app/server-actions/user/checkDonationSchedule";
-import MenuButton from "./menuButton";
+import CharityActions from "../charityActions";
+import getAccountBudgetData from "~/app/server-actions/user/getAccountBudgetData";
 
 interface ITableProps {
   searchParams: {
@@ -17,10 +18,9 @@ interface ITableProps {
 
 const PageResults: React.FC<ITableProps> = async ({ searchParams }) => {
   const { search, location, beneficiaries, state, countries } = searchParams;
-  console.log({searchParams});
-  
+  console.log({ searchParams });
+
   try {
-    
     const charities = await searchCharities(
       search,
       location,
@@ -28,9 +28,11 @@ const PageResults: React.FC<ITableProps> = async ({ searchParams }) => {
       state,
       countries,
     );
-    const donationSchedule = await checkDonationSchedule()
+    const donationSchedule = await checkDonationSchedule();
+    const budget = await getAccountBudgetData();
+
     const renderCharities = () => {
-      if(!charities) return null;
+      if (!charities) return null;
       return charities.map((charity) => (
         <tr key={charity.id} className="border-b">
           <td className="px-2 py-3">
@@ -41,24 +43,18 @@ const PageResults: React.FC<ITableProps> = async ({ searchParams }) => {
               {charity.data.Name}
             </Link>
           </td>
-          {/* <td className="px-4 py-2  text-sm font-light text-gray-600">
-            {charity.data.Abn}
-          </td> */}
           <td className=" px-4 py-2 text-sm font-light text-gray-600">
             {`${charity.data.AddressSuburb}, ${charity.data.AddressStateOrProvince}`}
           </td>
-          <td className="">
-            <MenuButton params={donationSchedule!}
-            remainingBudget={10000}
-            charityId={charity.uuid}
-            charityName={charity.data.Name}/>
-          {/* <ButtonPair
-            params={donationSchedule!}
-            remainingBudget={10000}
-            charityId={charity.uuid}
-            charityName={charity.data.Name}
-          /> */}
-        </td>
+          <td>
+            <CharityActions
+              donationSchedule={donationSchedule!}
+              remainingBudget={budget ? budget.remainingBudget / 100 : 0}
+              charityId={charity.uuid}
+              charityName={charity.data.Name}
+              charityAbn={charity.data.Abn}
+            />
+          </td>
         </tr>
       ));
     };

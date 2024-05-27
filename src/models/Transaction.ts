@@ -50,6 +50,14 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  receivedAccountId: {
+    type: String,
+    required: false,
+  },
+  isDgrRegistered: {
+    type: Boolean,
+    required: false,
+  },
 });
 
 export interface ITransaction {
@@ -61,6 +69,8 @@ export interface ITransaction {
   subscriptionId: string | null;
   charityName: string | null;
   charityId: string | null;
+  receivedAccountId: string;
+  isDgrRegistered: boolean;
 }
 
 export interface ITransactionDocument extends ITransaction, mongoose.Document {}

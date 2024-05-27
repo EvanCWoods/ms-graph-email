@@ -1,6 +1,7 @@
 import getAccountBudgetData from "~/app/server-actions/user/getAccountBudgetData";
-import getUserCharityBeneficiaries from "~/app/server-actions/user/getUserCharityBeneficiaries";
 import PieChart from "../../core/pieChart";
+import getUserCharityRatios from "~/app/server-actions/user/getUserDonationValue";
+import EditBudget from "./editBudget";
 // import updateUserBudget from "~/app/server-actions/user/updateUserBudget";
 
 /**
@@ -13,8 +14,7 @@ import PieChart from "../../core/pieChart";
  */
 const Budget = async () => {
   const budget = await getAccountBudgetData();
-  const changeAreas = await getUserCharityBeneficiaries();
-
+  const {charitiesNames, charitiesPercentage} = await getUserCharityRatios() ?? { charitiesNames: [], charitiesPercentage: [] };
   const renderBudget = () => {
     if (!budget) return null; // Return null to not render anything when budget is not yet loaded
 
@@ -30,9 +30,12 @@ const Budget = async () => {
           <div className="relative">
             <label
               htmlFor="budget"
-              className="block text-sm font-medium text-gray-700"
+              className="flex text-sm font-medium text-gray-700"
             >
-              Total Budget:
+              <span>Total Budget:</span>
+              <span className="h-[15px] w-[15px]">
+                <EditBudget currentBudget={budget.budget} allocatedBudget={budget.budget - budget.remainingBudget}/>
+              </span>
             </label>
             <div className="relative mt-1 rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -43,7 +46,7 @@ const Budget = async () => {
                 name="budget"
                 id="budget"
                 defaultValue={budget.budget / 100}
-                step={0.5}
+                disabled
                 min={5}
                 className="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm"
               />
@@ -105,7 +108,7 @@ const Budget = async () => {
 
   return (
     <div className="my-10 flex flex-col flex-wrap gap-4 rounded-lg border px-5 py-3 shadow-lg md:flex-row">
-      <h1 className="text-2xl text-gray-600 text-center w-full">Your Budget</h1>
+      <h1 className="text-2xl text-gray-600 text-center w-full">My Monthly Donation Budget</h1>
       <div className="mb-2 w-full border-b"></div>
       {/* Budget side */}
       <div className="flex w-4/5 flex-wrap items-center justify-center">
@@ -114,7 +117,7 @@ const Budget = async () => {
       {/* Areas of allocation */}
       <div className="flex w-1/5 flex-1 items-center justify-center">
         <div className="h-[130px] w-full flex justify-center">
-          <PieChart labels={changeAreas?.labels ?? []} data={changeAreas?.data ?? []} showLegend={false} />
+          <PieChart labels={charitiesNames ?? []} data={charitiesPercentage ?? []} showLegend={false} />
         </div>
       </div>
     </div>

@@ -30,14 +30,23 @@ const SelectCharityForDonation: React.FC<ISelectCharityForDonationProps> = ({
 
   return (
     <div>
-      <button className="bg-brand-orange text-[#fff] shadow-md hover:shadow-lg px-4 py-1 text-base rounded-md text-nowrap" onClick={handleSelect}>Select Charity</button>
+      <button
+        className="w-full text-nowrap rounded-md border border-brand-orange px-4 py-1 text-base text-brand-orange shadow-md hover:bg-brand-orange hover:text-white hover:shadow-lg"
+        onClick={handleSelect}
+      >
+        Select Charity
+      </button>
 
       {openDonationModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="rounded-lg bg-white p-4 shadow-lg">
             <form action={saveCharitySelection}>
               <input type="hidden" name="charity-id" value={charityId} />
-              <label>Donation Amount</label>
+              <div className="mb-5">
+                <h1 className="text-xl">Enter Your Donation Amount:</h1>
+                <p>You have ${remainingBudget ?? 0} left in your budget.</p>
+              </div>
+              
               <input
                 className="w-full rounded border border-gray-300 px-2 py-1"
                 type="number"

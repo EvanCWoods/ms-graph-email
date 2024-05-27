@@ -10,6 +10,10 @@ import { useState } from "react";
 import searchCharitiesOnAcnc from "~/app/server-actions/admin/searchCharitiesOnAcnc";
 import updateCharityAbn from "~/app/server-actions/charity/updateCharityAbn";
 
+interface IProps {
+  id: string;
+}
+
 /**
  * Renders a component for adding charity details.
  *
@@ -17,10 +21,13 @@ import updateCharityAbn from "~/app/server-actions/charity/updateCharityAbn";
  *
  * @returns {JSX.Element} The rendered component for adding charity details.
  */
-const AddCharityDetails = () => {
+const AddCharityDetails: React.FC<IProps> = ({ id }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [charities, setCharities] = useState<any>([]);
-  const [selectedCharity, setSelectedCharity] = useState<any>(null);
+  const [selectedCharity, setSelectedCharity] = useState<{
+    abn: string;
+    charityId: string;
+  }>({ abn: "", charityId: "" });
 
   const search = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,9 +35,12 @@ const AddCharityDetails = () => {
     setCharities(data);
   };
 
-  const handleClickCharity = (e: React.MouseEvent<HTMLTableRowElement>) => {
-    e.stopPropagation();
-    setSelectedCharity(e.currentTarget.dataset.abn);
+  const handleClickCharity = (charity: any) => {
+    console.log(charity);
+    setSelectedCharity({ abn: charity.abn, charityId: charity.id });
+    // e.stopPropagation();
+    // console.log(e.currentTarget.dataset);
+    // setSelectedCharity(e.currentTarget.dataset.abn);
   };
 
   const disabledClass = "bg-grey-300 text-grey-500 cursor-not-allowed";
@@ -75,9 +85,10 @@ const AddCharityDetails = () => {
                 {charities.map((charity: any) => (
                   <tr
                     key={charity.abn}
-                    className={`h-[35px] cursor-pointer hover:bg-gray-100 ${selectedCharity === charity.abn ? "bg-brand-lightOrange" : ""}`}
-                    onClick={handleClickCharity}
+                    className={`h-[35px] cursor-pointer hover:bg-gray-100 ${selectedCharity.charityId === charity.id ? "bg-brand-lightOrange" : ""}`}
+                    onClick={() => handleClickCharity(charity)}
                     data-abn={charity.abn}
+                    charity-id={charity}
                   >
                     <td className="text-left">{charity.name}</td>
                     <td className="text-left">{charity.abn}</td>
@@ -91,7 +102,9 @@ const AddCharityDetails = () => {
       </div>
       {charities && charities.length > 0 && (
         <form action={updateCharityAbn}>
-          <input type="hidden" name="charity-abn" value={selectedCharity} />
+          <input type="hidden" name="charity-abn" value={selectedCharity.abn} />
+          <input type="hidden" name="charity-id" value={selectedCharity.charityId} />
+          <input type="hidden" name="id" value={id} />
           <button
             type="submit"
             disabled={!selectedCharity}

@@ -7,6 +7,8 @@ import FeaturedCharities from "~/app/components/landing/featuredCharities";
 import getFeaturedCharities from "~/app/server-actions/charity/getFeaturedCharities";
 import Button from "./components/core/button";
 import CallToAction from "./components/landing/callToAction";
+import HowItWorks from "./components/landing/howItWorks";
+import CustodianRespect from "./components/landing/custodianRespect";
 
 /**
  * Renders the home page of the application.
@@ -18,17 +20,6 @@ export default async function HomePage() {
 
   return (
     <main className="flex flex-col gap-10">
-      {/* <HomeContentCard
-          title="Affordable donations made easy"
-          text="We make it easy for you to support communities you're passionate about, and by doing so create a more connected world."
-        />
-        <Image
-          src={HeroImage.src}
-          alt="hero image"
-          className="h-full w-full"
-          width={1000}
-          height={1000}
-        /> */}
       <div
         className="relative flex h-[500px] w-full items-center justify-start bg-cover bg-center p-2 text-white"
         style={{
@@ -43,12 +34,9 @@ export default async function HomePage() {
             Affordable donations made easy
           </h1>
           <p className="text-xl text-white">
-            We make it easy for you to support communities you&apos;re
-            passionate about,
+            Loose Change. Tight Communities
           </p>
-          <p className="text-xl text-white">
-            and by doing so create a more connected world.
-          </p>
+        
           <div className="mt-5">
             <Button
               variant="secondary"
@@ -63,8 +51,10 @@ export default async function HomePage() {
       <div className="mx-3 lg:mx-20">
         <WhatWeDo />
       </div>
+      <HowItWorks />
         <FeaturedCharities featuredCharities={featuredCharities} />
         <CallToAction />
+        <CustodianRespect />
     </main>
   );
 }

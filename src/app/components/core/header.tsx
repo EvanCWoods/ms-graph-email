@@ -13,10 +13,10 @@ const Header = () => {
         <BurgerMenu />
       </div>
       <div className="hidden items-center gap-4 sm:flex">
-        <FeedbackButton/>
         <Link href="/about">About Us</Link>
         <Link href="/charity-search">Charity Search</Link>
         <Link href="/dashboard">Dashboard</Link>
+        <FeedbackButton/>
         <UserButton />
       </div>
     </>

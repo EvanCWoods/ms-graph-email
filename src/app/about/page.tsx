@@ -6,26 +6,27 @@ export default function AboutUs() {
   return (
     <div className="flex flex-col items-center justify-center space-y-8">
       <div
-        className="flex w-full items-center justify-start bg-cover bg-center p-2 text-white"
+        className="relative flex w-full items-center justify-start bg-cover bg-center p-2 text-white"
         style={{
           backgroundImage: `url(${bannerImage.src})`,
           minHeight: "350px",
         }}
-      ></div>
+      >
+        <div className="absolute left-0 top-0 h-full w-full bg-black bg-opacity-25"></div>
 
-      <div className="flex w-full flex-wrap justify-center px-5">
-        <h2 className="w-full text-center text-6xl font-bold text-brand-orange">
+      <div className="relative flex w-full flex-wrap justify-center px-5 mx-10 md:w-3/4 md:ml-[10%]">
+        <h2 className="w-full text-center md:text-left text-6xl font-bold text-white">
           Welcome to Good Change
         </h2>
-        <p className="w-full text-center text-xl">
+        <p className="w-full text-center md:text-left text-xl">
           Where every act of kindness has a meaningful impact.
         </p>
-        <p className=" my-5 w-full text-center text-lg lg:w-1/2">
+        <p className=" my-5 w-full text-center md:text-left text-lg">
           We’re a not-for-profit (NFP) organisation with a clear mission to make
           it effortless for you to donate to the communities that matter most to
           them. We are making affordable donations easy.
         </p>
-        <div className="flex w-full justify-center">
+        <div className="flex w-full">
           <Button
             text="Get Started"
             size="lg"
@@ -33,9 +34,12 @@ export default function AboutUs() {
             redirectUrl="/register?step=1"
           />
         </div>
+      </div>  
       </div>
+
+      
       <div className="mx-auto w-full px-5 py-8 md:w-4/5">
-        <div className="grid grid-cols-1 gap-6 text-center lg:grid-cols-1 lg:gap-8 xl:grid-cols-3 xl:gap-12">
+        <div className="grid grid-cols-1 gap-6 text-center lg:grid-cols-1 lg:gap-8">
           <div className="hover-border-effect relative w-full overflow-hidden rounded-sm border bg-white p-6 shadow">
             <div className="left"></div>
             <div className="right"></div>

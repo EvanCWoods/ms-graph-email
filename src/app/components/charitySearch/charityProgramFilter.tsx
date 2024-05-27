@@ -40,11 +40,15 @@ const SimpleCharityFilter: React.FC<IProps> = async ({ parentId }) => {
   return (
     <div>
       <h1 className="mb-10 mt-16 w-full text-center text-3xl">
-        Choose a Program
+        Choose a Category
       </h1>
-       <BreadCrumbs programs={programs} />
-      <div className="flex flex-wrap items-center justify-center gap-5 px-32">
-        {renderCharityPrograms()}
+      <div>
+        <div className="px-10">
+          <BreadCrumbs programs={programs} />
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-5">
+          {renderCharityPrograms()}
+        </div>
       </div>
       {parentId && programs.results?.length === 0 && (
         <CharityListByProgram parentId={parentId} />

@@ -10,6 +10,9 @@ import dbConnect from "~/utils/dbConnect";
 import Individual from "~/models/Individual";
 import User from "~/models/User";
 import Company from "~/models/Company";
+import { pauseCollections } from "~/utils/stripe/pauseCollections";
+import { resumeCollections } from "~/utils/stripe/resumeCollections";
+import Charity from "~/models/Charity";
 
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY!);
 const secret = process.env.STRIPE_WEBHOOK_SECRET ?? "";
@@ -54,6 +57,20 @@ export async function POST(req: Request) {
         // Update the charge status and record the error
         //   await db.updateCharge(failedCharge.id, { status: 'failed', failureMessage: failedCharge.failure_message });
         break;
+      case "customer.subscription.updated":
+        console.log(event.data.object.pause_collection);
+        if (event.data.object.pause_collection) {
+          await pauseCollections(
+            event.data.object.customer as string,
+            event.data.object.id,
+          );
+        } else {
+          await resumeCollections(
+            event.data.object.customer as string,
+            event.data.object.id,
+          );
+        }
+        break;
       case "checkout.session.completed":
         const payment = event.data.object;
         console.log("Checkout session completed!", payment);
@@ -68,6 +85,8 @@ export async function POST(req: Request) {
           subscriptionId: payment.subscription,
           charityName: payment.metadata?.charityName,
           charityId: payment.metadata?.charityId,
+          receivedAccountId: payment.metadata?.receivedAccountId,
+          isDgrRegistered: payment.metadata?.isDgrRegistered,
         });
 
         await transaction.save();
@@ -76,6 +95,8 @@ export async function POST(req: Request) {
           charityId: payment.metadata?.charityId ?? "",
           amount: payment.amount_total ?? 0,
           charityName: payment.metadata?.charityName ?? "",
+          subscriptionId: payment.subscription as string,
+          paused: false,
         };
 
         const user = await User.findOne({
@@ -113,7 +134,31 @@ export async function POST(req: Request) {
           default:
             console.log(`Unhandled account type ${user.accountType}`);
         }
+      //* When a charity links their account as a payee
+      case "account.updated":
+        const account: any = event.data.object;
+        console.log({ event: event.data.object });
+        // Check if the account is capable of receiving payouts
+        if (account.capabilities.transfers === "active") {
+          console.log("Account is now capable of receiving payouts!");
+          // Retrieve metadata
+          const charityId = account.metadata.charityId;
 
+          try {
+            const charity = await Charity.findOneAndUpdate(
+              { _id: charityId },
+              { stripeAccountId: account.id, payoutsEnabled: true },
+              { new: true },
+            );
+            if (!charity) {
+              console.log("Charity not found");
+            } else {
+              console.log(`Charity updated successfully`);
+            }
+          } catch (error) {
+            console.error("Failed to update Charity:", error);
+          }
+        }
       default:
         console.log(`Unhandled event type ${event.type}`);
     }

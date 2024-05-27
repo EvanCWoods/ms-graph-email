@@ -23,6 +23,7 @@ export const createUserInDb = async (
   email: string,
   userId: string,
   schedule: string,
+  step: number,
 ) => {
   //* Create the user in Stripe
   const stripeCustomerId: string = await createUserStripeAccount(
@@ -40,22 +41,23 @@ export const createUserInDb = async (
       stripeCustomerId: stripeCustomerId,
       name: `${firstName} ${lastName}`,
       email: email,
-    }, 
+      signUpStep: step,
+    },
   );
 
   switch (user?.accountType) {
     case "individual":
       await Individual.findOneAndUpdate(
-        {userId: userId},
-        {donationSchedule: schedule}
+        { userId: userId },
+        { donationSchedule: schedule },
       );
       break;
     case "company":
       await Company.findOneAndUpdate(
-        {userId: userId},
-        {donationSchedule: schedule}
-      )
-
+        { userId: userId },
+        { donationSchedule: schedule },
+      );
+      break;
   }
   console.log({ user });
 };

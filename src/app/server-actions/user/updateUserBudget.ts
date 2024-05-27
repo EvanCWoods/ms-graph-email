@@ -1,9 +1,10 @@
-import "server-only";
+"use server";;
 
 import { auth } from "@clerk/nextjs";
 import User from "~/models/User";
 import dbConnect from "~/utils/dbConnect";
 import Individual from "~/models/Individual";
+import { redirect } from "next/navigation";
 
 /**
  * Updates the signup step for a user.
@@ -26,16 +27,15 @@ const updateUserBudget = async (formData: FormData) => {
   if (!user) {
     return;
   }
-  const individual = await Individual.findOneAndUpdate(
+  await Individual.findOneAndUpdate(
     {
       userId: user.id as string,
     },
     {
-      monthlyBudget: newBudget,
+      monthlyBudget: parseInt(newBudget) * 100,
     },
   );
-
-  return individual?.monthlyBudget;
+  redirect("/dashboard");
 };
 
 export default updateUserBudget;

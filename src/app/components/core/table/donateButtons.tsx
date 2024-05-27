@@ -11,7 +11,7 @@ interface IColumnProps {
 const ButtonPair : React.FC<IColumnProps> = ({ params, charityId, remainingBudget, charityName }) => {
       if (params === "monthly") {
         return (
-            <div className="block">
+            <div className="flex">
               <OneTimeDonationButton charityName={charityName} charityId={charityId}/>
               <SelectCharityForDonation charityId={charityId} remainingBudget={remainingBudget}/>
             </div>

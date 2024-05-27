@@ -1,6 +1,11 @@
 import saveCompanyDetails from "~/app/server-actions/user/saveCompanyDetails";
 
-const AddCompanyDetails = async () => {
+interface IProps {
+  id: string;
+  schedule: string;
+}
+
+const AddCompanyDetails: React.FC<IProps> = async ({ id, schedule }) => {
     return (
       <div className="flex w-full flex-wrap items-center justify-center lg:mt-24">
         {/* Title for the page */}
@@ -11,6 +16,8 @@ const AddCompanyDetails = async () => {
           </h1>
           <form action={saveCompanyDetails}>
             <div className="my-8 flex flex-wrap">
+              <input type="hidden" name="id" value={id} />
+              <input type="hidden" name="schedule" value={schedule} />
               <label className="w-full">Company Name</label>
               <input
                 type="text"

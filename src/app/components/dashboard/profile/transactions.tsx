@@ -15,9 +15,9 @@ const Transactions = async () => {
       // Determine the background color based on the transaction status
       const statusColor =
         transaction.status === "complete"
-          ? "bg-brand-utilityGreen"
-          : transaction.status === "pending"
-            ? "bg-yellow-500"
+          ? "bg-yellow-500"
+          : transaction.status === "distributed"
+            ? "bg-brand-utilityGreen"
             : "bg-red-500"; // Default to red for failed or other statuses
 
       return (
@@ -33,7 +33,7 @@ const Transactions = async () => {
               <p
                 className={`rounded-full px-3 py-2 text-sm text-white ${statusColor}`}
               >
-                {transaction.status}
+                {transaction.status === "complete" ? "Collected" : transaction.status === "distributed" ? "Distributed" : transaction.status}
               </p>
               <p className="ml-5 text-sm">${transaction.amount / 100}</p>{" "}
               <p className="ml-5 text-nowrap text-sm">
@@ -57,7 +57,7 @@ const Transactions = async () => {
 
   return (
     <div className="flex max-h-[300px] w-full flex-wrap justify-center rounded-lg border pb-5 pt-2 shadow-lg">
-      <h1 className="text-2xl text-gray-600">Transactions</h1>
+      <h1 className="text-2xl text-gray-600">My Transactions</h1>
       <div className="my-2 w-full border-b"></div>
       <div className="max-h-[220px] w-full overflow-y-scroll">
         {renderTransactions()}

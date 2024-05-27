@@ -19,7 +19,7 @@ const DonationTile: React.FC<IPopularDonationAmount> = ({ amount, label }) => {
           <h3 className="text-grey-700 text-xl group-hover:text-black">
             ${amount}
           </h3>
-          <input type="hidden" name="donation-amount" value={amount * 100} />
+          <input type="hidden" name="donation-amount" value={amount} />
         </div>
         <p className="my-4 text-center font-medium group-hover:text-white">
           {label}

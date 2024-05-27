@@ -7,9 +7,11 @@ export default authMiddleware({
     "/login",
     "/register",
     "/about",
+    "/test",
     "/api/clerk",
     "/favicon.ico",
     "/api/stripe",
+    "/api/test",
   ],
   ignoredRoutes: ["/no-auth-in-this-route"],
 });

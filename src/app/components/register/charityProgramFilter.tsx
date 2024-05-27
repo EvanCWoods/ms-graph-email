@@ -25,10 +25,11 @@ const CharityProgramFilter: React.FC<IProps> = async ({
   isRegistering,
 }) => {
   const programs = await getCharityPrograms(parentId);
+  console.log({programs})
 
   const renderCharityPrograms = () => {
     if (!programs) return null;
-    return programs.map((program: any) => (
+    return programs.results.map((program: any) => (
       <button key={program.classie_id} className="focus:outline-none">
         <Link
           href={`/register?step=5&parent=${program.classie_id}`}
