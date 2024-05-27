@@ -24,7 +24,7 @@ const saveCharitySelection = async (formData: FormData) => {
 
   const charityData: unknown = await getOneCharityById(charityId);
 
-  console.log(charityData)
+  console.log(charityData);
 
   console.log({
     charityId,
@@ -61,6 +61,7 @@ const saveCharitySelection = async (formData: FormData) => {
       await createSubscriptionInStripe(
         user._id as ObjectId,
         charityId,
+        (charityData as { Abn: string }).Abn,
         newAllocation.charityName,
         parseFloat(donationAmount),
       );
@@ -74,6 +75,8 @@ const saveCharitySelection = async (formData: FormData) => {
       await createSubscriptionInStripe(
         user._id as ObjectId,
         charityId,
+        (charityData as { Abn: string }).Abn,
+
         newAllocation.charityName,
         parseFloat(donationAmount),
       );
